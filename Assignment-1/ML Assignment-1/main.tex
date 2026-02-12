@@ -1,0 +1,310 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{amsmath} 
+\usepackage{float} % Required for [H] placement
+
+\begin{document}
+
+\begin{center}
+    \large \textbf{Sri Sivasubramaniya Nadar College of Engineering, Chennai} \\
+    (An autonomous Institution affiliated to Anna University) \\
+    \vspace{0.3cm}
+\end{center}
+
+\begin{table}[H] 
+\renewcommand{\arraystretch}{1.5}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|cll|}
+\hline
+Degree \& Branch     & \multicolumn{1}{c|}{B.E.   Computer Science \& Engineering} & \multicolumn{1}{l|}{Semester}        & V                          \\ \hline
+Subject Code \& Name & \multicolumn{3}{c|}{UCS2612 \& Machine Learning Algorithms Laboratory}                                                         \\ \hline
+Academic year       & \multicolumn{1}{c|}{2025-2026 (Even)}                         & \multicolumn{1}{c|}{Batch:2023-2027} & \multicolumn{1}{c|}{\textbf{Due date: 23/12/25}} \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{center}
+ \textbf{Experiment 1: Working with Python packages -- Numpy, Scipy, Scikit-Learn, Matplotlib}
+\end{center}
+\vspace{0.5cm}
+{
+\raggedleft
+Name: Melvin Isaac I\\
+Reg.No: 3122235001082\\
+}
+\vspace{0.5cm}
+\noindent \textbf{Aim:} \\
+To explore and work with Python packages like Numpy, Scikit-learn, and Matplotlib on datasets from public repositories and identify ML tasks, feature selection techniques, and suitable algorithms.
+
+\vspace{0.5cm}
+\noindent
+\textbf{Libraries used:}
+\begin{itemize}[noitemsep]
+    \item Numpy (imported as \texttt{np})
+    \item Pandas (imported as \texttt{pd})
+    \item Matplotlib.pyplot (imported as \texttt{plt})
+    \item Seaborn (imported as \texttt{sns})
+    \item OpenCV (\texttt{cv2})
+    \item Standard Scaler(from sklearn.preprocessing)
+    \item Math (Standard Library)
+    
+\end{itemize}
+
+\vspace{0.5cm}
+\noindent
+\textbf{Mathematical and Theoretical description of the objectives performed:}
+
+\begin{itemize}
+    \item \textbf{Purpose:} Perform Exploratory Data Analysis (EDA) to understand data behavior, summarize value distributions, identify anomalies, evaluate class proportions, and uncover inter-feature relationships.
+     
+    \item \textbf{Summary Statistics}
+    \begin{itemize}
+        \item Mean value computed as: $\mu = \frac{1}{n} \sum x_i$
+        \item Sample variance expressing dispersion: $s^2 = \frac{1}{n-1} \sum (x_i - \mu)^2$
+        \item Quantile measures (Median, $Q1$, $Q3$) used to analyze spread and construct boxplots.
+    \end{itemize}
+     
+    \item \textbf{Distribution Analysis Using Histograms}
+    \begin{itemize}
+        \item Frequency-based approximation of empirical distributions through binning to reveal shape and central tendencies.
+        \item Kernel Density Estimation (KDE) overlaid to provide a smooth estimate of the underlying distribution:
+        \[
+        \hat{f}(x) = \frac{1}{nh} \sum_{i=1}^{n} K\left(\frac{x - x_i}{h}\right)
+        \]
+        where $K$ denotes the kernel function and $h$ represents the bandwidth parameter.
+    \end{itemize}
+     
+    \item \textbf{Boxplot Visualization}
+    \begin{itemize}
+        \item Displays median and quartiles ($Q1$, $Q3$) with the interquartile range defined as $IQR = Q3 - Q1$.
+        \item Whiskers extend to data points within $[Q1 - 1.5 \cdot IQR, \ Q3 + 1.5 \cdot IQR]$, while values beyond this range are flagged as outliers.
+    \end{itemize}
+     
+    \item \textbf{Feature Relationship Plots}
+    \begin{itemize}
+        \item Pairwise scatter visualizations are used to detect trends, separability between classes, and nonlinear dependencies.
+        \item Diagonal plots present KDEs or histograms to highlight individual feature distributions.
+    \end{itemize}
+     
+    \item \textbf{Correlation Visualization}
+    \begin{itemize}
+        \item Linear association between variables quantified using the Pearson correlation coefficient:
+        \[
+        r_{XY} = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
+        \]
+        \[
+        \text{cov}(X,Y) = \frac{1}{n-1} \sum (X_i - \bar{X})(Y_i - \bar{Y})
+        \]
+        \item Coefficient values lie in the interval $[-1, 1]$, indicating both magnitude and direction of linear dependence.
+    \end{itemize}
+     
+    \item \textbf{Categorical Data Visualization}
+    \begin{itemize}
+        \item Count-based bar plots are used to examine category frequencies, with optional class-wise grouping to study imbalance patterns.
+    \end{itemize}
+
+    \item \textbf{Image Data Exploration}
+    \begin{itemize}
+        \item Histograms or KDE plots of image dimensions (height and width) are used to determine consistency and preprocessing requirements.
+        \item Representative image samples are displayed to qualitatively assess visual characteristics.
+    \end{itemize}
+     
+    \item \textbf{Handling Missing Data}
+    \begin{itemize}
+        \item Column-wise inspection of missing entries to inform strategies such as imputation or exclusion.
+    \end{itemize}
+
+    \item \textbf{Analytical Objectives}
+    \begin{itemize}
+        \item Detect skewed distributions, multiple modes, anomalous observations, correlated features, and class imbalance in order to support informed preprocessing and model selection.
+    \end{itemize}
+\end{itemize}
+
+
+\vspace{0.5 cm}
+\noindent
+\textbf{Results and Discussions:}
+\subsection{Loan Amount Prediction}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{loan_columns.png}
+    \caption{Dataset Columns}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{loan_distribution.png}
+    \caption{Loan Amount Distribution(histogram plot)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{loan_boxplot.png}
+    \caption{Boxplot Distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{loan_correlation.png}
+    \caption{Correlation Matrix}
+\end{figure}
+\subsection{Predicting Diabetes}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{diabetes_columns.png}
+    \caption{Dataset Columns}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{diabetes_distribution.png}
+    \caption{Histogram Distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{diabetes_boxplot.png}
+    \caption{Boxplot distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{diabetes_correlation.png}
+    \caption{Correlation Matrix}
+\end{figure}
+\subsection{Classification of Email Spam}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{spam_ham_columns.png}
+    \caption{dataset columns}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{spam_ham_features.png}
+    \caption{spam vs ham distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{word_count_distirubtion.png}
+    \caption{word count distribution(Normalisation)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{word_count_distirubtion_1.png}
+    \caption{word count distribution(Standardisation)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{spam_correlation.png}
+    \caption{Correlation Matrix}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{word_scatterplot.png}
+    \caption{Correlation Matrix}
+\end{figure}
+
+\subsection{Handwritten Character Recognition (MNIST)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{sample_images.png}
+
+    \caption{sample images}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{minst_distribution.png}
+    \caption{Digit Distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{mnist_pixel_intensity.png}
+    \caption{Pixel Intensity Analysis}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{mnist_hw.png}
+
+    \caption{Height weight distribution}
+\end{figure}
+
+
+\subsection{Iris Dataset}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{iris_columns.png}
+    \caption{Dataset Columns}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{iris_hist_box.png}
+    \caption{Histogram and Boxplot Distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{iris_class.png}
+    \caption{class distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{iris_correlation.png}
+    \caption{Correlation Matrix}
+\end{figure}
+
+
+
+\begin{table}[H] 
+\centering
+\vspace{0.5cm}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{0.15\textwidth}|p{0.22\textwidth}|p{0.28\textwidth}|p{0.25\textwidth}|}
+\hline
+\textbf{Dataset} & \textbf{Type of ML Task} & \textbf{Feature Selection Technique} & \textbf{Suitable ML Algorithm} \\ \hline
+Iris Dataset & Multi-class Classification & Correlation Matrix / ANOVA F-value & k-Nearest Neighbors (k-NN), Decision Trees \\ \hline
+Loan Amount Prediction & Regression & Recursive Feature Elimination (RFE) / Pearson Correlation & Linear Regression, Random Forest Regressor \\ \hline
+Predicting Diabetes & Binary Classification & Chi-Square Test / SelectKBest & Logistic Regression, Support Vector Machine (SVM) \\ \hline
+Classification of Email Spam & Binary Classification (NLP) & Information Gain / Chi-Square (on word vectors) & Naive Bayes, SVM \\ \hline
+Handwritten Character Recognition / MNIST & Multi-class Image Classification & Principal Component Analysis (PCA) & Convolutional Neural Networks (CNN), SVM \\ \hline
+\end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+\noindent
+\textbf{Learning Practices:}
+
+\begin{itemize}
+    \item Examine dataset organization: Understand the structure by analyzing dimensions, data types, and missing entries.
+\item Explore data distributions: Develop the ability to visualize patterns using histograms, box plots, and correlation maps.
+\item Assess class proportions: Analyze label balance and its influence on model behavior and outcomes.
+\item Analyze feature interactions: Investigate relationships among variables through pair plots and correlation analysis.
+\item Conduct statistical evaluation: Apply techniques such as ANOVA F-tests and correlation-based feature selection.
+\item Utilize model-driven insights: Interpret feature importance scores obtained from Random Forest models.
+\item Reduce dimensional complexity: Implement PCA to support visualization and uncover latent data patterns.
+
+\end{itemize}
+
+\vspace{0.5cm}
+
+\end{document}
